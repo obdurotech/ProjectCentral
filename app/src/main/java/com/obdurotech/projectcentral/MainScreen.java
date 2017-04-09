@@ -89,7 +89,7 @@ public class MainScreen extends Fragment {
             uid = user.getUid();
         }
 
-        text1.setText("Welcome " + user_name + " UID: " + uid);
+        text1.setText(user_name + " - " + "Projects");
 
         return rootView;
     }
