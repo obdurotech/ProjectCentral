@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">ProjectCentral</string>
+    <string name="task1">HomeScreen</string>
+    <string name="task2">Task_2</string>
+    <string name="task3">Task_3</string>
+    <string name="task4">Task_4</string>
+    <string name="about">About Me!</string>
+    <string name="logout">Logout</string>
+
+    <string name="search_hint">Search Here</string>
+    <string name="action_settings">Action</string>
+    <string name="menu_search">SearchMenu</string>
+
+    <string name="home">Home</string>
+    <string name="open_drawer">open</string>
+    <string name="close_drawer">close</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <string name="menu_share">Share!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

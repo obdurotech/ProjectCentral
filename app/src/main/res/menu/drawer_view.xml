@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/home"
+            android:checked="true"/>
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="@string/about"/>
+        <item
+            android:id="@+id/nav_task2"
+            android:icon="@drawable/ic_filter_2_black_24dp"
+            android:title="@string/task2" />
+    </group>
+
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+    <item
+        android:id="@+id/nav_task4"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        android:title="@string/logout" />
+    </group>
+</menu>
