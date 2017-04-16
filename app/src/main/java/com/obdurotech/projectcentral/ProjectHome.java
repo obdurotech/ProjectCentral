@@ -2,7 +2,6 @@ package com.obdurotech.projectcentral;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -10,17 +9,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class ProjectHome extends AppCompatActivity {
 
     FirebaseAuth mAuth;
 
@@ -31,20 +29,28 @@ public class MainActivity extends AppCompatActivity {
     private View navHeader;
     private TextView txtName, txtMail;
 
+    CardView tasksCard;
+    CardView remindersCard;
+    CardView mediaCard;
+    CardView notesCard;
+
+    String projectName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_project_home);
+
+        Intent intent = getIntent();
+        projectName = intent.getStringExtra("project_name");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (savedInstanceState == null) {
-            Fragment frag = new MainScreen();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.flContent, frag);
-            ft.commit();
-        }
+        tasksCard = (CardView) findViewById(R.id.tasks_item);
+        remindersCard = (CardView) findViewById(R.id.reminders_item);
+        mediaCard = (CardView) findViewById(R.id.media_item);
+        notesCard = (CardView) findViewById(R.id.notes_item);
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
@@ -62,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
         // Tie DrawerLayout events to the ActionBarToggle
         mDrawer.addDrawerListener(drawerToggle);
 
+        mediaCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MediaHome.class);
+                intent.putExtra("project_name", projectName);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     private void loadNavHeader() {
@@ -71,12 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
         txtName.setText(user.getDisplayName());
         txtMail.setText(user.getEmail());
-    }
-
-    @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
-        finish();
     }
 
     private void setupDrawerContent(NavigationView navigationView) {

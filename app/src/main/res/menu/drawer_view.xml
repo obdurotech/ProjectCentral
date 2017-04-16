@@ -9,13 +9,22 @@
             android:title="@string/home"
             android:checked="true"/>
         <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_person_black_24dp"
-            android:title="@string/about"/>
+            android:id="@+id/nav_reminders"
+            android:icon="@drawable/ic_alarm_black_24dp"
+            android:title="@string/reminders"/>
         <item
-            android:id="@+id/nav_task2"
-            android:icon="@drawable/ic_filter_2_black_24dp"
-            android:title="@string/task2" />
+            android:id="@+id/nav_notes"
+            android:icon="@drawable/ic_note_black_24dp"
+            android:title="@string/notes" />
+    </group>
+
+    <group
+        android:id="@+id/menu_mid"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/settings" />
     </group>
 
     <group

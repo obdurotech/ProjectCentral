@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">ProjectCentral</string>
     <string name="task1">HomeScreen</string>
-    <string name="task2">Task_2</string>
-    <string name="task3">Task_3</string>
-    <string name="task4">Task_4</string>
-    <string name="about">About Me!</string>
+    <string name="reminders">Reminders</string>
+    <string name="notes">Quick Notes</string>
+    <string name="settings">Settings</string>
     <string name="logout">Logout</string>
 
     <string name="search_hint">Search Here</string>
