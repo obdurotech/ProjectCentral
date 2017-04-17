@@ -17,6 +17,9 @@ public class Medium implements Serializable
     @SerializedName("media_name")
     @Expose
     private String mediaName;
+    @SerializedName("media_type")
+    @Expose
+    private String mediaType;
     private final static long serialVersionUID = 767238625450181572L;
 
     public String getMediaId() {
@@ -41,6 +44,14 @@ public class Medium implements Serializable
 
     public void setMediaLink(String mediaLink) {
         this.mediaLink = mediaLink;
+    }
+
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
     }
 
 }

@@ -15,10 +15,10 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,9 +26,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
 
@@ -43,7 +46,10 @@
         <activity
             android:name=".ProjectHome"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MediaHome"></activity>
+        <activity
+            android:name=".MediaHome"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"/>
     </application>
 
 </manifest>

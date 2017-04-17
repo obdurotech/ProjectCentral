@@ -39,6 +39,8 @@ dependencies {
             url "http://jcenter.bintray.com/"
         }
         maven { url 'https://maven.fabric.io/public' }
+
+        maven { url 'https://dl.bintray.com/drummer-aidan/maven' }
     }
 
     compile 'com.android.support:appcompat-v7:25.3.1'
@@ -60,6 +62,8 @@ dependencies {
     compile 'com.android.support:customtabs:25.3.1'
     compile 'com.android.support:mediarouter-v7:25.3.1'
     compile 'com.google.firebase:firebase-storage:10.0.1'
+    compile 'com.facebook.fresco:fresco:1.2.0'
+    compile 'com.afollestad:easyvideoplayer:0.3.0'
     testCompile 'junit:junit:4.12'
 }
 

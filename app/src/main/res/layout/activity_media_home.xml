@@ -31,7 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:paddingBottom="4dp"
-            android:paddingTop="50dp" />
+            android:paddingTop="50dp"
+            android:textAppearance="@style/PagerTabStripText"/>
     </android.support.v4.view.ViewPager>
 
     <Button
@@ -47,7 +48,7 @@
         android:id="@+id/uploadBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload Image"
+        android:text="Upload Media"
         android:layout_below="@+id/view_Pager"
         android:layout_centerHorizontal="true" />
 

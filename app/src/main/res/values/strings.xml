@@ -21,4 +21,26 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="send_to">"Send to"</string>
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Welcome to Project Central!</string>
+    <string name="slide_1_desc">All your Projects and Tasks in one place for easy access.</string>
+
+    <string name="slide_2_title">Reminders</string>
+    <string name="slide_2_desc">Easily add reminders for important milestones.</string>
+
+    <string name="slide_3_title">Media</string>
+    <string name="slide_3_desc">All project related images and video in one place.</string>
+
+    <string name="slide_4_title">Notes</string>
+    <string name="slide_4_desc">Add Notes for quick access to information.</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
 </resources>
