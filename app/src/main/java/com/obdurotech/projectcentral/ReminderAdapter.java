@@ -2,6 +2,8 @@ package com.obdurotech.projectcentral;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -10,105 +12,98 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.squareup.picasso.Picasso;
 
-/**
- * Created by Sandesh Ashok Naik on 4/9/2017.
- */
-
-public class ProjectsAdapter extends FirebaseRecyclerAdapter<Project, ProjectsAdapter.ProjectsViewHolder> {
+public class ReminderAdapter extends FirebaseRecyclerAdapter<Reminder, ReminderAdapter.ReminderViewHolder> {
 
     private Context mContext;
-    public static ProjectClass projectClass;
+    static private String mProjectName;
+    public static ReminderClass reminderClass;
 
-    public ProjectsAdapter(Class<Project> modelClass, int modelLayout,
-                                    Class<ProjectsViewHolder> holder, DatabaseReference ref, Context context) {
+    //public ReminderAdapter(){ };
+
+    public ReminderAdapter(Class<Reminder> modelClass, int modelLayout,
+                           Class<ReminderAdapter.ReminderViewHolder> holder, DatabaseReference ref, Context context, String projectName) {
         super(modelClass, modelLayout, holder, ref);
         this.mContext = context;
+        this.mProjectName = projectName;
     }
 
-    //TODO: Populate ViewHolder and add listeners.
-    public static class ProjectsViewHolder extends RecyclerView.ViewHolder {
+    public static class ReminderViewHolder extends RecyclerView.ViewHolder {
 
         private CardView myView;
         private TextView txtHeader;
         private TextView txtFooter;
-        private ImageView iv;
         private ImageView optionsButton;
 
         FirebaseAuth mAuth;
 
-        public ProjectsViewHolder(View v) {
+        public ReminderViewHolder(View v) {
 
             super(v);
 
-            myView = (CardView) v.findViewById(R.id.card_view);
-            txtHeader = (TextView) v.findViewById(R.id.firstLine);
-            txtFooter = (TextView) v.findViewById(R.id.secondLine);
-            iv = (ImageView) v.findViewById(R.id.icon);
-            optionsButton = (ImageView) v.findViewById(R.id.textViewOptions);
+            myView = (CardView) v.findViewById(R.id.reminder_CardView);
+            txtHeader = (TextView) v.findViewById(R.id.reminder_header);
+            txtFooter = (TextView) v.findViewById(R.id.reminder_footer);
+            optionsButton = (ImageView) v.findViewById(R.id.reminder_textViewOptions);
 
             mAuth = FirebaseAuth.getInstance();
             FirebaseUser user = mAuth.getCurrentUser();
 
-            projectClass = new ProjectClass(user.getUid());
+            reminderClass = new ReminderClass(user.getUid(), mProjectName);
         }
     }
 
     @Override
-    protected void populateViewHolder(final ProjectsViewHolder projectsViewHolder, final Project project, final int i) {
+    protected void populateViewHolder(final ReminderAdapter.ReminderViewHolder reminderViewHolder, final Reminder reminder, final int i) {
 
-        projectsViewHolder.txtHeader.setText(project.getName());
-        projectsViewHolder.txtFooter.setText(project.getDescription());
-        //Picasso.with(mContext).load(movie.getUrl()).into(movieViewHolder.iv);
+        reminderViewHolder.txtHeader.setText(reminder.getRemId());
+        reminderViewHolder.txtFooter.setText(reminder.getRemDesc());
 
-        projectsViewHolder.optionsButton.setOnClickListener(new View.OnClickListener() {
+        reminderViewHolder.optionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(v.getContext(), projectsViewHolder.optionsButton);
+                PopupMenu popup = new PopupMenu(v.getContext(), reminderViewHolder.optionsButton);
                 popup.inflate(R.menu.options_menu);
-                if (projectClass.getSize() == 0) {
-                    //movieData.setAdapter(myFirebaseRecyclerAdapter);
-                    projectClass.setContext(mContext);
-                    projectClass.initializeDataFromCloud();
+                if (reminderClass.getSize() == 0) {
+                    reminderClass.setContext(mContext);
+                    reminderClass.initializeDataFromCloud();
                 }
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                /*popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu1:
                                 break;
                             case R.id.menu2:
-                                projectClass.removeItemFromServer(project);
+                                reminderClass.removeItemFromServer(reminder);
                                 break;
                         }
                         return false;
                     }
-                });
+                });*/
 
                 popup.show();
             }
         });
 
-        projectsViewHolder.myView.setOnClickListener(new View.OnClickListener() {
+        reminderViewHolder.myView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
 
-                DatabaseReference ref = projectClass.getFireBaseRef();
-                String id = project.getId();
+                DatabaseReference ref = reminderClass.getFireBaseRef();
+                String id = reminder.getRemId();
                 ref.child(id).addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
                     @Override
                     public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                         Context context = v.getContext();
-                        Intent intent = new Intent(context, ProjectHome.class);
-                        intent.putExtra("project_name", project.getName());
+                        Intent intent = new Intent(context, ReminderDetail.class);
+                        intent.putExtra("reminderId", reminder.getRemId());
                         context.startActivity(intent);
                     }
 
@@ -120,5 +115,4 @@ public class ProjectsAdapter extends FirebaseRecyclerAdapter<Project, ProjectsAd
             }
         });
     }
-
 }
