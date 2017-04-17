@@ -65,8 +65,6 @@ public class ProjectsAdapter extends FirebaseRecyclerAdapter<Project, ProjectsAd
     @Override
     protected void populateViewHolder(final ProjectsViewHolder projectsViewHolder, final Project project, final int i) {
 
-        //TODO: Populate viewHolder by setting the movie attributes to cardview fields
-
         projectsViewHolder.txtHeader.setText(project.getName());
         projectsViewHolder.txtFooter.setText(project.getDescription());
         //Picasso.with(mContext).load(movie.getUrl()).into(movieViewHolder.iv);

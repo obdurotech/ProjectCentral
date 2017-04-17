@@ -43,7 +43,11 @@
         <activity
             android:name=".ProjectHome"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MediaHome"></activity>
+        <activity android:name=".MediaHome" />
+        <activity android:name=".ReminderAdapter" />
+        <activity android:name=".ReminderDetail" />
+        <activity android:name=".AddNewReminder" />
+        <activity android:name=".ReminderHolder"></activity>
     </application>
 
 </manifest>

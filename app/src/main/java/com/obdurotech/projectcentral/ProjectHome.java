@@ -76,6 +76,16 @@ public class ProjectHome extends AppCompatActivity {
                 v.getContext().startActivity(intent);
             }
         });
+
+        //Open Reminders screen
+        remindersCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent reminderIntent = new Intent(v.getContext(), ReminderHolder.class);
+                reminderIntent.putExtra("project_name", projectName);
+                v.getContext().startActivity(reminderIntent);
+            }
+        });
     }
 
     private void loadNavHeader() {
