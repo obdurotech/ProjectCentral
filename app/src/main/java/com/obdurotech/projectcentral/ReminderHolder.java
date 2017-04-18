@@ -12,8 +12,8 @@ public class ReminderHolder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder_holder);
-        Intent intent = new Intent();
-        String projectName = intent.getStringExtra("project_Name");
+        Intent intent = getIntent();
+        String projectName = intent.getStringExtra("project_name");
 
         //ReminderHomeFragment fragment = ReminderHomeFragment.newInstance("movie", projectName);
         //getSupportFragmentManager().beginTransaction().add(R.id.reminderHolder, fragment).commit();

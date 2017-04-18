@@ -58,10 +58,10 @@ public class ReminderClass {
 
     public void onItemAddedToCloud(HashMap item){
         int insertPosition = 0;
-        String id = (String) item.get("id");
+        String id = (String) item.get("remId");
         for(int i=0;i<remindersList.size();i++){
             HashMap project = (HashMap) remindersList.get(i);
-            String mid = (String) project.get("id");
+            String mid = (String) project.get("remId");
             if(mid.equals(id)){
                 return;
             }
@@ -77,10 +77,10 @@ public class ReminderClass {
     }
 
     public void onItemUpdatedToCloud(HashMap item){
-        String id = (String) item.get("id");
+        String id = (String) item.get("remId");
         for(int i=0;i<remindersList.size();i++){
             HashMap project = (HashMap) remindersList.get(i);
-            String mid = (String) project.get("id");
+            String mid = (String) project.get("remId");
             if(mid.equals(id)){
                 remindersList.remove(i);
                 remindersList.add(i,item);
@@ -134,7 +134,7 @@ public class ReminderClass {
 
         uid = userID;
         remindersList = new ArrayList<>();
-        mRef = FirebaseDatabase.getInstance().getReference().child("userdata").child(uid).child("projects").child(projectName).getRef();
+        mRef = FirebaseDatabase.getInstance().getReference().child("userdata").child(uid).child("projects").child(projectName).child("reminders").getRef();
         myFirebaseRecylerAdapter = null;
         mContext = null;
 

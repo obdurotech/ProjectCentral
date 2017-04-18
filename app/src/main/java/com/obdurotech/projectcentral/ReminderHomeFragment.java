@@ -131,6 +131,7 @@ public class ReminderHomeFragment extends Fragment {
 
                 Context context = view.getContext();
                 Intent intent = new Intent(context, AddNewReminder.class);
+                intent.putExtra("project_name", projectName);
                 context.startActivity(intent);
             }
         });

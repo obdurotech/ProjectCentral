@@ -62,8 +62,9 @@ public class ReminderAdapter extends FirebaseRecyclerAdapter<Reminder, ReminderA
     @Override
     protected void populateViewHolder(final ReminderAdapter.ReminderViewHolder reminderViewHolder, final Reminder reminder, final int i) {
 
-        reminderViewHolder.txtHeader.setText(reminder.getRemId());
-        reminderViewHolder.txtFooter.setText(reminder.getRemDesc());
+
+        reminderViewHolder.txtHeader.setText(reminder.getRemDesc());
+        reminderViewHolder.txtFooter.setText(reminder.getReminderDate().toString());
 
         reminderViewHolder.optionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +104,8 @@ public class ReminderAdapter extends FirebaseRecyclerAdapter<Reminder, ReminderA
                     public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, ReminderDetail.class);
-                        intent.putExtra("reminderId", reminder.getRemId());
+                        //intent.putExtra("reminderId", reminder.getRemId());
+                        intent.putExtra("reminder_name", reminder);
                         context.startActivity(intent);
                     }
 

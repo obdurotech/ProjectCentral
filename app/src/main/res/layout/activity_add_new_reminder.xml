@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_add_new_reminder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,9 +11,45 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.obdurotech.projectcentral.AddNewReminder">
 
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="61dp"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/rem_textInputLayout">
+
+        <EditText
+            android:id="@+id/reminderDescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter Reminder Name" />
+    </android.support.design.widget.TextInputLayout>
+
+
     <com.simplicityapks.reminderdatepicker.lib.ReminderDatePicker
         android:id="@+id/date_picker"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rem_textInputLayout"/>
+
+    <Button
+        android:id="@+id/reminder_setAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Reminder!"
+        android:layout_marginTop="148dp"
+        android:layout_below="@+id/date_picker"
+        android:layout_toLeftOf="@+id/reminder_done_btn"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/reminder_done_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done!"
+        android:layout_alignBaseline="@+id/reminder_setAlarm"
+        android:layout_alignBottom="@+id/reminder_setAlarm"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="69dp" />
 
 </RelativeLayout>
