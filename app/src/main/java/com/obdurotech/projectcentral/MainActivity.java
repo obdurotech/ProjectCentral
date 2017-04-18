@@ -11,12 +11,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,20 +33,23 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
     private View navHeader;
+    SimpleDraweeView draweeView;
     private TextView txtName, txtMail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fresco.initialize(this);
         setContentView(R.layout.activity_main);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
-            Fragment frag = new MainScreen();
+            Fragment fragment = new MainScreen();
+            fragment.setEnterTransition(new Slide(Gravity.LEFT));
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.flContent, frag);
+            ft.replace(R.id.flContent, fragment);
             ft.commit();
         }
 
@@ -50,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         navHeader = nvDrawer.getHeaderView(0);
 
+        draweeView = (SimpleDraweeView) navHeader.findViewById(R.id.profileImageView);
         txtName = (TextView) navHeader.findViewById(R.id.nameTxt);
         txtMail = (TextView) navHeader.findViewById(R.id.emailTxt);
 
@@ -71,6 +79,16 @@ public class MainActivity extends AppCompatActivity {
 
         txtName.setText(user.getDisplayName());
         txtMail.setText(user.getEmail());
+
+        if (user.getPhotoUrl() != null)
+        {
+            Uri uri = user.getPhotoUrl();
+            draweeView.setImageURI(uri);
+        }
+        else
+        {
+            draweeView.setImageResource(R.drawable.logo);
+        }
     }
 
     @Override
@@ -104,6 +122,9 @@ public class MainActivity extends AppCompatActivity {
                 //fragment = new RecyclerViewFragment();
                 break;
             case R.id.nav_settings:
+                fragment = new ProfileScreen();
+                break;
+            case R.id.nav_about:
                 //
                 break;
             case R.id.nav_task4:
@@ -116,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
 
         //replacing the fragment
         if (fragment != null) {
+            fragment.setEnterTransition(new Slide(Gravity.BOTTOM));
+            fragment.setExitTransition(new Slide(Gravity.START));
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.flContent, fragment);
             ft.commit();

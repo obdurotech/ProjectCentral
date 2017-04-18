@@ -19,7 +19,7 @@ public class ReminderHolder extends AppCompatActivity {
         //getSupportFragmentManager().beginTransaction().add(R.id.reminderHolder, fragment).commit();
 
         Bundle bundle = new Bundle();
-        bundle.putString("project_name", projectName );
+        bundle.putString("project_name", projectName);
         ReminderHomeFragment reminderFragment = new ReminderHomeFragment();
         reminderFragment.setArguments(bundle);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
