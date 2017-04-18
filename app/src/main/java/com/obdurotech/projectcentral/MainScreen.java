@@ -2,6 +2,7 @@ package com.obdurotech.projectcentral;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -98,7 +99,9 @@ public class MainScreen extends Fragment {
             }
         });
 
-        toolbarText.setText(user.getDisplayName());
+        Resources res = getResources();
+        String text = res.getString(R.string.main_title, user.getDisplayName());
+        toolbarText.setText(text);
 
         DatabaseReference childRef =
                 FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid()).child("projects").getRef();

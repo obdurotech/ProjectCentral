@@ -1,52 +1,47 @@
 package com.obdurotech.projectcentral;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public class MediaHome extends AppCompatActivity {
 
@@ -55,6 +50,8 @@ public class MediaHome extends AppCompatActivity {
     boolean mediaChanged = false;
 
     ViewPager vpPager;
+    Button btnNext;
+    Button btnPrev;
     FragmentPagerAdapter adapterViewPager;
     private Uri filePath;
 
@@ -82,6 +79,8 @@ public class MediaHome extends AppCompatActivity {
         mediaList = new ArrayList<>();
 
         setContentView(R.layout.activity_media_home);
+        btnNext = (Button) findViewById(R.id.nextBtn);
+        btnPrev = (Button) findViewById(R.id.prevBtn);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.media_toolbar);
         setSupportActionBar(toolbar);
@@ -116,18 +115,16 @@ public class MediaHome extends AppCompatActivity {
                 if (mediaList.size() > 0 )
                 {
                     vpPager.setBackgroundResource(R.color.tw__transparent);
-                    if (adapterViewPager == null)
-                        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+                    //if (vpPager == null || adapterViewPager == null)
+                    //{
+                    //    vpPager = (ViewPager) findViewById(R.id.view_Pager);
+                    //    adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+                    //}
                     vpPager.setAdapter(adapterViewPager);
                     vpPager.getAdapter().notifyDataSetChanged();
                 }
                 else
                     vpPager.setBackground(getDrawable(R.drawable.no_media));
-
-                //setContentView(R.layout.activity_media_home);
-                //vpPager = (ViewPager) findViewById(R.id.view_Pager);
-                //adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
-                //vpPager.setAdapter(adapterViewPager);
 
                 buttonUpload = (Button) findViewById(R.id.uploadBtn);
                 storageReference = FirebaseStorage.getInstance().getReference();
@@ -182,6 +179,22 @@ public class MediaHome extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                vpPager.setCurrentItem(vpPager.getCurrentItem() + 1, true);
+            }
+        });
+
+        btnPrev.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                vpPager.setCurrentItem(vpPager.getCurrentItem() - 1, true);
             }
         });
     }
@@ -279,15 +292,9 @@ public class MediaHome extends AppCompatActivity {
             progressDialog.setTitle("Uploading");
             progressDialog.show();
 
-            Calendar c = Calendar.getInstance();
-            String yr = String.valueOf(c.get(Calendar.YEAR));
-            String mm = String.valueOf(c.get(Calendar.MONTH));
-            String day = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
-            String hr = String.valueOf(c.get(Calendar.HOUR_OF_DAY));
-            String min = String.valueOf(c.get(Calendar.MINUTE));
-            String sec = String.valueOf(c.get(Calendar.SECOND));
+            String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 
-            final String filename = "media" + yr + mm + day + hr + min + sec;
+            final String filename = "media" + timeStamp;
 
             StorageReference storageRef = storageReference.child(type + "s/" + filename);
             storageRef.putFile(filePath)
@@ -367,6 +374,18 @@ public class MediaHome extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
 
             return mediaList.get(position).getMediaName();
+        }
+
+        @Override
+        public void finishUpdate(ViewGroup container) {
+            try
+            {
+                super.finishUpdate(container);
+            }
+            catch (NullPointerException nullPointerException)
+            {
+                System.out.println("Catch the NullPointerException in FragmentPagerAdapter.finishUpdate");
+            }
         }
 
     }

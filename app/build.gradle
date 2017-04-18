@@ -66,6 +66,7 @@ dependencies {
     compile 'com.simplicityapks:reminderdatepicker:1.3.+'
     compile 'com.facebook.fresco:fresco:1.2.0'
     compile 'com.afollestad:easyvideoplayer:0.3.0'
+    compile 'com.makeramen:roundedimageview:2.3.0'
     testCompile 'junit:junit:4.12'
 }
 

@@ -134,7 +134,8 @@ public class ReminderClass {
 
         uid = userID;
         remindersList = new ArrayList<>();
-        mRef = FirebaseDatabase.getInstance().getReference().child("userdata").child(uid).child("projects").child(projectName).getRef();
+        mRef = FirebaseDatabase.getInstance().getReference().child("userdata").child(uid).child("projects")
+                .child(projectName).child("reminders").getRef();
         myFirebaseRecylerAdapter = null;
         mContext = null;
 

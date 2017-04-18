@@ -52,8 +52,7 @@
         <activity android:name=".ReminderHolder"/>
         <activity
             android:name=".MediaHome"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"/>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
