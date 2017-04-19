@@ -2,6 +2,7 @@ package com.obdurotech.projectcentral;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -27,6 +29,7 @@ public class ProjectHome extends AppCompatActivity {
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
     private View navHeader;
+    SimpleDraweeView draweeView;
     private TextView txtName, txtMail;
 
     CardView tasksCard;
@@ -56,6 +59,7 @@ public class ProjectHome extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         navHeader = nvDrawer.getHeaderView(0);
 
+        draweeView = (SimpleDraweeView) navHeader.findViewById(R.id.profileImageView);
         txtName = (TextView) navHeader.findViewById(R.id.nameTxt);
         txtMail = (TextView) navHeader.findViewById(R.id.emailTxt);
 
@@ -95,6 +99,16 @@ public class ProjectHome extends AppCompatActivity {
 
         txtName.setText(user.getDisplayName());
         txtMail.setText(user.getEmail());
+
+        if (user.getPhotoUrl() != null)
+        {
+            Uri uri = user.getPhotoUrl();
+            draweeView.setImageURI(uri);
+        }
+        else
+        {
+            draweeView.setImageResource(R.drawable.logo);
+        }
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -122,6 +136,9 @@ public class ProjectHome extends AppCompatActivity {
                 //fragment = new RecyclerViewFragment();
                 break;
             case R.id.nav_settings:
+                fragment = new ProfileScreen();
+                break;
+            case R.id.nav_about:
                 //
                 break;
             case R.id.nav_task4:

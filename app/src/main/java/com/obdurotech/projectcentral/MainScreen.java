@@ -99,9 +99,7 @@ public class MainScreen extends Fragment {
             }
         });
 
-        Resources res = getResources();
-        String text = res.getString(R.string.main_title, user.getDisplayName());
-        toolbarText.setText(text);
+        toolbarText.setText(user.getDisplayName() + " - ProjectCentral");
 
         DatabaseReference childRef =
                 FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid()).child("projects").getRef();

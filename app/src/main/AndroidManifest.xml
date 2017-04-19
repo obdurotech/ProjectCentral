@@ -5,11 +5,12 @@
     <permission
         android:name="com.assignments.sandeshashoknaik.assignment9.ASSET_ACCESS"
         android:protectionLevel="signature" />
-    <permission android:name="android.permission.READ_CALENDAR"
-        android:protectionLevel="normal"/>
+    <permission android:name="android.permission.READ_CALENDAR"/>
     <permission android:name="android.permission.WRITE_CALENDAR"/>
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
         android:allowBackup="true"

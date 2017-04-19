@@ -62,7 +62,6 @@ public class ProfileScreen extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    String mediaName = "";
     private static final int PICK_IMAGE_REQUEST = 234;
     private Uri filePath;
 
@@ -116,9 +115,9 @@ public class ProfileScreen extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_profile_screen, container, false);
 
-        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        /*Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         toolbar.setTitle(getString(R.string.app_name));
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);*/
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -194,7 +193,6 @@ public class ProfileScreen extends Fragment {
                         .setCancelable(false)
                         .setPositiveButton("Browse for Image", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialogBox, int id) {
-                                mediaName = userInputDialogEditText.getText().toString();
                                 Intent intent = new Intent();
                                 intent.setType("image/*");
                                 intent.setAction(Intent.ACTION_GET_CONTENT);
