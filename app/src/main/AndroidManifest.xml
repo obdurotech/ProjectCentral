@@ -5,11 +5,16 @@
     <permission
         android:name="com.assignments.sandeshashoknaik.assignment9.ASSET_ACCESS"
         android:protectionLevel="signature" />
-    <permission android:name="android.permission.READ_CALENDAR"
-        android:protectionLevel="normal"/>
-    <permission android:name="android.permission.WRITE_CALENDAR"/>
+    <permission android:name="android.permission.READ_CALENDAR" />
+    <permission android:name="android.permission.WRITE_CALENDAR" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
 
     <application
         android:allowBackup="true"
@@ -20,8 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:theme="@style/AppTheme.NoActionBar"
-            android:name=".WelcomeActivity">
+            android:name=".WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,8 +35,7 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -44,6 +48,9 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+            <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyCcqjM9NR1PwKsGLtn8YykpVUD7ToR0hv8" />
         </activity>
         <activity android:name=".AddNewProject" />
         <activity
@@ -52,10 +59,10 @@
         <activity android:name=".ReminderAdapter" />
         <activity android:name=".ReminderDetail" />
         <activity android:name=".AddNewReminder" />
-        <activity android:name=".ReminderHolder"/>
+        <activity android:name=".ReminderHolder" />
         <activity
             android:name=".MediaHome"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

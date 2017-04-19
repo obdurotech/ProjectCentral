@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +43,10 @@ public class AddNewReminder extends AppCompatActivity {
     private EditText descText;
     private Button submitButton;
     private Button reminderButton;
+    private Button locationButton;
     private Date reminderDate;
+    private int PLACE_PICKER_REQUEST = 1;
+    final private int MY_PERMISSIONS_REQUEST_READ_CALENDAR = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,7 @@ public class AddNewReminder extends AppCompatActivity {
         descText = (EditText) findViewById(R.id.reminderDescription);
         submitButton = (Button) findViewById(R.id.reminder_done_btn);
         reminderButton = (Button) findViewById(R.id.reminder_setAlarm);
+        locationButton = (Button) findViewById(R.id.reminder_setLocation);
         Intent newIntent = getIntent();
         final String projectName = newIntent.getStringExtra("project_name");
         //Listener for date change
@@ -56,6 +65,34 @@ public class AddNewReminder extends AppCompatActivity {
             public void onDateSelected(Calendar date) {
                 reminderDate = date.getTime();
                 Toast.makeText(AddNewReminder.this, "Selected date: "+ getDateTimeInstance().format(date.getTime()), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+                Intent intent = null;
+                try {
+                    intent = builder.build(AddNewReminder.this);
+                    startActivityForResult(intent, PLACE_PICKER_REQUEST);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+                // Start the Intent by requesting a result, identified by a request code.
+
+
+                /*try {
+                    startActivityForResult(builder.build(AddNewReminder.this), PLACE_PICKER_REQUEST);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }*/
             }
         });
 
@@ -72,12 +109,15 @@ public class AddNewReminder extends AppCompatActivity {
 
                 int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(),
                         Manifest.permission.WRITE_CALENDAR);
-
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), com.obdurotech.projectcentral.Manifest.permission.READ_CALENDAR)
-                        == PackageManager.PERMISSION_GRANTED
-                        && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_CALENDAR)
-                        == PackageManager.PERMISSION_GRANTED)
-                    {
+                if(permissionCheck != PackageManager.PERMISSION_GRANTED)
+                {
+                    ActivityCompat.requestPermissions (AddNewReminder.this,
+                            new String[]{Manifest.permission.WRITE_CALENDAR},
+                            MY_PERMISSIONS_REQUEST_READ_CALENDAR);
+                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), com.obdurotech.projectcentral.Manifest.permission.READ_CALENDAR)
+                            == PackageManager.PERMISSION_GRANTED
+                            && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_CALENDAR)
+                            == PackageManager.PERMISSION_GRANTED) {
                         try {
                             GregorianCalendar calDate = new GregorianCalendar(year, month, day, hour, minute);
                             ContentResolver contentResolver = getContentResolver();
@@ -95,6 +135,7 @@ public class AddNewReminder extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
+                }
 
             }
         });
@@ -147,6 +188,16 @@ public class AddNewReminder extends AppCompatActivity {
                 c.close();
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(getApplicationContext(), data);
+                String toastMsg = String.format("Place: %s", place.getName());
+                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
             }
         }
     }

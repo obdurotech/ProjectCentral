@@ -67,6 +67,7 @@ dependencies {
     compile 'com.facebook.fresco:fresco:1.2.0'
     compile 'com.afollestad:easyvideoplayer:0.3.0'
     compile 'com.makeramen:roundedimageview:2.3.0'
+    compile 'com.google.android.gms:play-services-places:10.2.1'
     testCompile 'junit:junit:4.12'
 }
 

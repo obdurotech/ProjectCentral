@@ -100,8 +100,8 @@ public class MainScreen extends Fragment {
         });
 
         Resources res = getResources();
-        String text = res.getString(R.string.main_title, user.getDisplayName());
-        toolbarText.setText(text);
+        //String text = res.getString(R.string.main_title, user.getDisplayName());
+        toolbarText.setText(user.getDisplayName());
 
         DatabaseReference childRef =
                 FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid()).child("projects").getRef();
