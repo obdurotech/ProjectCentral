@@ -42,7 +42,6 @@ public class MainScreen extends Fragment {
     protected RecyclerView mRecyclerView;
     protected ProjectsAdapter myFirebaseRecylerAdapter;
     protected ProjectClass projectClass;
-    //protected CustomAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected SearchView searchView;
 
@@ -52,16 +51,6 @@ public class MainScreen extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-        //if (savedInstanceState != null)
-        //{
-        //    myDataset = (List<Map<String, ?>>) savedInstanceState.get("movieList");
-        //}
-//
-        //else
-        //{
-        //    initDataset();
-        //}
     }
 
     @Override
@@ -171,13 +160,5 @@ public class MainScreen extends Fragment {
         super.onSaveInstanceState(savedInstanceState);
 
         //savedInstanceState.putSerializable("movieList", (Serializable) mAdapter.getMovieList());
-    }
-
-    /**
-     * Generates Strings for RecyclerView's adapter. This data would usually come
-     * from a local content provider or remote server.
-     */
-    private void initDataset() {
-        myDataset = pc.getProjectList();
     }
 }

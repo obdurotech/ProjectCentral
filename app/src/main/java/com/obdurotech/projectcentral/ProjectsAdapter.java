@@ -67,7 +67,6 @@ public class ProjectsAdapter extends FirebaseRecyclerAdapter<Project, ProjectsAd
 
         projectsViewHolder.txtHeader.setText(project.getName());
         projectsViewHolder.txtFooter.setText(project.getDescription());
-        //Picasso.with(mContext).load(movie.getUrl()).into(movieViewHolder.iv);
 
         projectsViewHolder.optionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +74,6 @@ public class ProjectsAdapter extends FirebaseRecyclerAdapter<Project, ProjectsAd
                 PopupMenu popup = new PopupMenu(v.getContext(), projectsViewHolder.optionsButton);
                 popup.inflate(R.menu.options_menu);
                 if (projectClass.getSize() == 0) {
-                    //movieData.setAdapter(myFirebaseRecyclerAdapter);
                     projectClass.setContext(mContext);
                     projectClass.initializeDataFromCloud();
                 }
