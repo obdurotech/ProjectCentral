@@ -1,5 +1,6 @@
 package com.obdurotech.projectcentral;
 
+
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
@@ -14,14 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Varun on 4/16/2017.
+ * Created by Varun on 4/19/2017.
  */
 
-public class ReminderClass {
+public class NotesClass {
     String uid;
-    List<Map<String,?>> remindersList;
+    List<Map<String,?>> notesList;
     DatabaseReference mRef;
-    ReminderAdapter myFirebaseRecylerAdapter;
+    NotesAdapter myFirebaseRecylerAdapter;
     Context mContext;
 
     public DatabaseReference getFireBaseRef(){
@@ -29,10 +30,10 @@ public class ReminderClass {
     }
 
     public int getSize(){
-        return remindersList.size();
+        return notesList.size();
     }
 
-    public void setAdapter(ReminderAdapter mAdapter) {
+    public void setAdapter(NotesAdapter mAdapter) {
         myFirebaseRecylerAdapter = mAdapter;
     }
 
@@ -40,17 +41,17 @@ public class ReminderClass {
 
     public void onItemRemovedFromCloud(HashMap item){
         int position = -1;
-        String id = (String) item.get("remId");
-        for(int i=0;i<remindersList.size();i++){
-            HashMap project = (HashMap) remindersList.get(i);
-            String mid = (String) project.get("remId");
+        String id = (String) item.get("noteId");
+        for(int i=0;i<notesList.size();i++){
+            HashMap project = (HashMap) notesList.get(i);
+            String mid = (String) project.get("noteId");
             if(mid.equals(id)){
                 position= i;
                 break;
             }
         }
         if(position != -1){
-            remindersList.remove(position);
+            notesList.remove(position);
             Toast.makeText(mContext, "Item Removed:" + id, Toast.LENGTH_SHORT).show();
 
         }
@@ -58,10 +59,10 @@ public class ReminderClass {
 
     public void onItemAddedToCloud(HashMap item){
         int insertPosition = 0;
-        String id = (String) item.get("remId");
-        for(int i=0;i<remindersList.size();i++){
-            HashMap project = (HashMap) remindersList.get(i);
-            String mid = (String) project.get("remId");
+        String id = (String) item.get("noteId");
+        for(int i=0;i<notesList.size();i++){
+            HashMap project = (HashMap) notesList.get(i);
+            String mid = (String) project.get("noteId");
             if(mid.equals(id)){
                 return;
             }
@@ -71,19 +72,19 @@ public class ReminderClass {
                 break;
             }
         }
-        remindersList.add(insertPosition,item);
+        notesList.add(insertPosition,item);
         // Toast.makeText(mContext, "Item added:" + id, Toast.LENGTH_SHORT).show();
 
     }
 
     public void onItemUpdatedToCloud(HashMap item){
-        String id = (String) item.get("remId");
-        for(int i=0;i<remindersList.size();i++){
-            HashMap project = (HashMap) remindersList.get(i);
-            String mid = (String) project.get("remId");
+        String id = (String) item.get("noteId");
+        for(int i=0;i<notesList.size();i++){
+            HashMap project = (HashMap) notesList.get(i);
+            String mid = (String) project.get("noteId");
             if(mid.equals(id)){
-                remindersList.remove(i);
-                remindersList.add(i,item);
+                notesList.remove(i);
+                notesList.add(i,item);
                 Log.d("My Test: NotifyChanged",id);
 
                 break;
@@ -93,7 +94,7 @@ public class ReminderClass {
     }
 
     public void initializeDataFromCloud() {
-        remindersList.clear();
+        notesList.clear();
         mRef.addChildEventListener(new com.google.firebase.database.ChildEventListener() {
             @Override
             public void onChildAdded(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
@@ -130,16 +131,13 @@ public class ReminderClass {
     }
 
 
-    public ReminderClass(String userID, String projectName){
+    public NotesClass(String userID, String projectName){
 
         uid = userID;
-        remindersList = new ArrayList<>();
-        mRef = FirebaseDatabase.getInstance().getReference().child("userdata").child(uid).child("projects").child(projectName).child("reminders").getRef();
+        notesList = new ArrayList<>();
+        mRef = FirebaseDatabase.getInstance().getReference().child("userdata").child(uid).child("projects").child(projectName).child("notes").getRef();
         myFirebaseRecylerAdapter = null;
         mContext = null;
 
     }
-
-
 }
-

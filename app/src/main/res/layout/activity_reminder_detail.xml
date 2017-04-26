@@ -17,27 +17,28 @@
         android:layout_height="50dp"
         android:paddingTop="10dp"
         android:textSize="20dp"
+        android:background="#EEEEEE"
         android:textColor="@color/black"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="48dp"
-        android:textAlignment="center"
         android:id="@+id/reminderDetail_When_textView" />
 
     <TextView
         android:text="Where?"
+        android:background="#EEEEEE"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingTop="10dp"
         android:textSize="20dp"
         android:textColor="@color/black"
-        android:textAlignment="center"
         android:id="@+id/reminderDetail_Where_textView"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:text="Location"
+        android:background="#EEEEEE"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingTop="10dp"
@@ -49,6 +50,7 @@
 
     <TextView
         android:text="Time"
+        android:background="#EEEEEE"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingTop="10dp"

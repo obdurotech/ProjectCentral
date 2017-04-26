@@ -79,4 +79,5 @@
     <string name="prompt_password">Old Password</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="notes_description">Enter your notes</string>
 </resources>

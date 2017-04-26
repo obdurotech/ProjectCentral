@@ -45,8 +45,10 @@ public class AddNewReminder extends AppCompatActivity {
     private Button reminderButton;
     private Button locationButton;
     private Date reminderDate;
+    private Reminder reminderObj = new Reminder();
     private int PLACE_PICKER_REQUEST = 1;
     final private int MY_PERMISSIONS_REQUEST_READ_CALENDAR = 0;
+    final private int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,27 +74,27 @@ public class AddNewReminder extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.ACCESS_FINE_LOCATION);
+                if(permissionCheck != PackageManager.PERMISSION_GRANTED) {
 
-                Intent intent = null;
-                try {
-                    intent = builder.build(AddNewReminder.this);
-                    startActivityForResult(intent, PLACE_PICKER_REQUEST);
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
+                    ActivityCompat.requestPermissions (AddNewReminder.this,
+                            new String[]{Manifest.permission.ACCESS_COARSE_LOACTION},
+                            MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+
+                    PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+                    Intent intent = null;
+                    try {
+                        intent = builder.build(AddNewReminder.this);
+                        startActivityForResult(intent, PLACE_PICKER_REQUEST);
+                    } catch (GooglePlayServicesRepairableException e) {
+                        e.printStackTrace();
+                    } catch (GooglePlayServicesNotAvailableException e) {
+                        e.printStackTrace();
+                    }
                 }
-                // Start the Intent by requesting a result, identified by a request code.
 
-
-                /*try {
-                    startActivityForResult(builder.build(AddNewReminder.this), PLACE_PICKER_REQUEST);
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }*/
             }
         });
 
@@ -152,13 +154,12 @@ public class AddNewReminder extends AppCompatActivity {
                 DatabaseReference childRef =
                         FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid()).child("projects").
                                 child(projectName).getRef();
-                Reminder reminderObj = new Reminder();
+
                 reminderObj.setRemId(remId);
                 reminderObj.setRemDesc(descText.getText().toString());
                 reminderObj.setReminderDate(reminderDate);
-                reminderObj.setReminderLocation("Unknown");
 
-                childRef.child("reminders").child(reminderObj.getRemDesc()).setValue(reminderObj);
+                childRef.child("reminders").child(reminderObj.getRemId()).setValue(reminderObj);
 
                 Toast.makeText(view.getContext(), "New Reminder Added: " + reminderObj.getRemDesc(), Toast.LENGTH_SHORT).show();
 
@@ -197,6 +198,7 @@ public class AddNewReminder extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(getApplicationContext(), data);
                 String address = (String)place.getAddress();
+                reminderObj.setReminderLocation(address);
                 String toastMsg = String.format("Place: %s", place.getName());
                 Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
             }

@@ -90,6 +90,16 @@ public class ProjectHome extends AppCompatActivity {
                 v.getContext().startActivity(reminderIntent);
             }
         });
+
+        //Open Notes screen
+        notesCard.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent notesIntent = new Intent(v.getContext(), NotesHolder.class);
+                notesIntent.putExtra("project_name", projectName);
+                v.getContext().startActivity(notesIntent);
+            }
+        });
     }
 
     private void loadNavHeader() {
