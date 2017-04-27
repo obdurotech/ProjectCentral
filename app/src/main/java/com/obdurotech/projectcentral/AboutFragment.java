@@ -3,10 +3,12 @@ package com.obdurotech.projectcentral;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 
 /**
@@ -63,8 +65,18 @@ public class AboutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about, container, false);
+
+        final View rootView = inflater.inflate(R.layout.fragment_about, container, false);
+
+        Uri uri1 = Uri.parse("res:///" + R.drawable.sandesh);
+        SimpleDraweeView draweeView1 = (SimpleDraweeView) rootView.findViewById(R.id.sandesh_image);
+        draweeView1.setImageURI(uri1);
+
+        Uri uri2 = Uri.parse("res:///" + R.drawable.varun);
+        SimpleDraweeView draweeView2 = (SimpleDraweeView) rootView.findViewById(R.id.varun_image);
+        draweeView2.setImageURI(uri2);
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -74,7 +86,7 @@ public class AboutFragment extends Fragment {
         }
     }
 
-    @Override
+    /*@Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
@@ -83,7 +95,7 @@ public class AboutFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-    }
+    }*/
 
     @Override
     public void onDetach() {

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.obdurotech.projectcentral.TaskDetail">
+
+
+    <TextView
+        android:id="@+id/taskStatus_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/task_bg_pending"
+        android:paddingBottom="5dp"
+        android:paddingStart="15dp"
+        android:paddingTop="5dp"
+        android:text="Pending!"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:layout_below="@+id/taskStatus_image"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/taskStatus_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="10dp"
+        android:text="Task Status"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/taskType_text"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/taskType_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/task_bg_pending"
+        android:paddingBottom="5dp"
+        android:paddingStart="15dp"
+        android:paddingTop="5dp"
+        android:text="Task Type"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/taskType_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="10dp"
+        android:text="Task Type"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/taskDesc_text"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/taskName_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="TaskName"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/taskDesc_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text=""
+        android:textSize="18sp"
+        android:paddingStart="15dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:background="@drawable/task_bg_pending"
+        android:layout_below="@+id/taskDesc_heading"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/taskDesc_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:paddingBottom="10dp"
+        android:text="Details"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingStart="10dp"
+        android:layout_below="@+id/task_line"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/task_line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/taskName_text"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@color/colorAccent"
+        android:layout_marginTop="5dp"/>
+
+    <ImageView
+        android:id="@+id/taskStatus_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/taskStatus_heading"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/taskDone_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mark as Done"
+        android:background="@color/colorAccent"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/taskStatus_text"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

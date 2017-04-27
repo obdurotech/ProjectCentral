@@ -15,9 +15,9 @@
         fresco:placeholderImage="@drawable/placeholder"
         fresco:roundAsCircle="true"
         android:layout_gravity="center"
-        android:layout_marginTop="19dp"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/varun_image" />
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/about_text"
+        android:layout_marginEnd="12dp" />
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/varun_image"
@@ -26,9 +26,9 @@
         fresco:placeholderImage="@drawable/placeholder"
         fresco:roundAsCircle="true"
         android:layout_gravity="center"
-        android:layout_marginBottom="25dp"
-        android:layout_above="@+id/varun_text"
-        android:layout_alignEnd="@+id/about_text" />
+        android:layout_alignTop="@+id/sandesh_image"
+        android:layout_toEndOf="@+id/about_text"
+        android:layout_marginStart="16dp" />
 
     <TextView
         android:id="@+id/sandesh_text"
@@ -40,9 +40,10 @@
         android:textSize="24sp"
         android:typeface="sans"
         android:textColor="@color/white"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="10dp"
         android:layout_below="@+id/sandesh_image"
-        android:layout_alignStart="@+id/sandesh_image" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/about_text"
@@ -53,9 +54,9 @@
         android:textAppearance="@android:style/TextAppearance.Material"
         android:textSize="24sp"
         android:typeface="sans"
-        android:textColor="@color/white"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/varun_text"
@@ -66,8 +67,31 @@
         android:textAppearance="@android:style/TextAppearance.Material"
         android:textSize="24sp"
         android:typeface="sans"
-        android:layout_marginBottom="29dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/varun_image"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:layout_alignBaseline="@+id/sandesh_text"
+        android:layout_alignBottom="@+id/sandesh_text"
+        android:layout_alignEnd="@+id/varun_image" />
+
+    <TextView
+        android:id="@+id/pc_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="ProjectCentral - 2017"
+        android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.Material"
+        android:textSize="24sp"
+        android:typeface="sans"
+        android:textColor="@color/white"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="5dp"/>
+
+    <ImageView
+        android:id="@+id/white_line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/pc_text"
+        android:layout_centerHorizontal="true"
+        fresco:srcCompat="@android:color/white" />
 </RelativeLayout>

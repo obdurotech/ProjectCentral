@@ -4,14 +4,19 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,6 +30,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
+import com.ToxicBakery.viewpager.transforms.DepthPageTransformer;
+import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +45,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,6 +56,7 @@ public class MediaHome extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 234;
     private static final int REQUEST_TAKE_GALLERY_VIDEO = 101;
+    private static final int REQUEST_IMAGE_CAPTURE = 100;
     boolean mediaChanged = false;
 
     ViewPager vpPager;
@@ -59,7 +69,7 @@ public class MediaHome extends AppCompatActivity {
     private Button buttonUpload;
     private StorageReference storageReference;
 
-    DatabaseReference childRef;
+    Uri mCameraUri;
     DatabaseReference mRef;
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -67,7 +77,7 @@ public class MediaHome extends AppCompatActivity {
     List<Medium> mediaList;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
@@ -88,6 +98,7 @@ public class MediaHome extends AppCompatActivity {
         vpPager = (ViewPager) findViewById(R.id.view_Pager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
+        vpPager.setPageTransformer(true, new CubeOutTransformer());
 
         mRef = FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid()).
                 child("projects").child(projectName).child("media").getRef();
@@ -115,13 +126,12 @@ public class MediaHome extends AppCompatActivity {
                 if (mediaList.size() > 0 )
                 {
                     vpPager.setBackgroundResource(R.color.tw__transparent);
-                    //if (vpPager == null || adapterViewPager == null)
-                    //{
-                    //    vpPager = (ViewPager) findViewById(R.id.view_Pager);
-                    //    adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
-                    //}
                     vpPager.setAdapter(adapterViewPager);
+                    vpPager.setPageTransformer(true, new CubeOutTransformer());
                     vpPager.getAdapter().notifyDataSetChanged();
+
+                    if (savedInstanceState != null)
+                        vpPager.setCurrentItem(savedInstanceState.getInt("currentItem", 0));
                 }
                 else
                     vpPager.setBackground(getDrawable(R.drawable.no_media));
@@ -139,6 +149,14 @@ public class MediaHome extends AppCompatActivity {
                         alertDialogBuilderUserInput.setView(mView);
 
                         final EditText userInputDialogEditText = (EditText) mView.findViewById(R.id.media_NameInput);
+                        final Button cameraBtn = (Button) mView.findViewById((R.id.cameraButton));
+
+                        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+                        {
+                            ActivityCompat.requestPermissions(MediaHome.this,
+                                    new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+                        }
 
                         alertDialogBuilderUserInput
                                 .setCancelable(false)
@@ -169,8 +187,21 @@ public class MediaHome extends AppCompatActivity {
                                             }
                                         });
 
-                        AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+                        final AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
                         alertDialogAndroid.show();
+
+                        cameraBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mediaName = userInputDialogEditText.getText().toString();
+                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                mCameraUri = FileProvider.getUriForFile(getApplicationContext(),
+                                        getApplicationContext().getPackageName() + ".provider", getOutputMediaFile());
+                                intent.putExtra(MediaStore.EXTRA_OUTPUT, mCameraUri);
+                                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                                alertDialogAndroid.dismiss();
+                            }
+                        });
                     }
                 });
             }
@@ -197,6 +228,28 @@ public class MediaHome extends AppCompatActivity {
                 vpPager.setCurrentItem(vpPager.getCurrentItem() - 1, true);
             }
         });
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 0) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            }
+        }
+    }
+
+    private static File getOutputMediaFile(){
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "ProjectCentral");
+
+        if (!mediaStorageDir.exists()){
+            if (!mediaStorageDir.mkdirs()){
+                return null;
+            }
+        }
+        return new File(mediaStorageDir.getPath() + File.separator + "image.jpg");
     }
 
     @Override
@@ -257,6 +310,7 @@ public class MediaHome extends AppCompatActivity {
         vpPager = (ViewPager) findViewById(R.id.view_Pager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
+        vpPager.setPageTransformer(true, new CubeOutTransformer());
     }
 
     @Override
@@ -265,20 +319,27 @@ public class MediaHome extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 uploadFile("image");
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         if (requestCode == REQUEST_TAKE_GALLERY_VIDEO && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 uploadFile("video");
 
-            } catch (IOException e) {
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            filePath = mCameraUri;
+            try {
+                uploadFile("image");
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -309,7 +370,7 @@ public class MediaHome extends AppCompatActivity {
                             @SuppressWarnings("VisibleForTests")
                             String link = taskSnapshot.getDownloadUrl().toString();
                             media.setMediaLink(link);
-                            if (mediaName.length() > 0)
+                            if (mediaName != null && mediaName.length() > 0)
                                 media.setMediaName(mediaName);
                             else
                                 media.setMediaName(type + vpPager.getCurrentItem());
@@ -388,5 +449,11 @@ public class MediaHome extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("pageItem", vpPager.getCurrentItem());
     }
 }

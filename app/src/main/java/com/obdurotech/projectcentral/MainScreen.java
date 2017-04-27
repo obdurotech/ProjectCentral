@@ -12,6 +12,7 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
 import com.firebase.client.DataSnapshot;
@@ -26,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 public class MainScreen extends Fragment {
     private static final String TAG = "MainScreen";
@@ -65,6 +68,8 @@ public class MainScreen extends Fragment {
         toolbarText = (TextView) rootView.findViewById(R.id.titleText);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.projects_recycler);
+        SlideInUpAnimator animator = new SlideInUpAnimator(new OvershootInterpolator(1f));
+        mRecyclerView.setItemAnimator(animator);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));

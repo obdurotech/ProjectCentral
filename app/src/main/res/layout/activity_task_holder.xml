@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_reminder_holder"
+    android:id="@+id/activity_task_holder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.obdurotech.projectcentral.ReminderHolder">
+    tools:context="com.obdurotech.projectcentral.TaskHolder">
     <FrameLayout
-        android:id="@+id/reminderHolder"
+        android:id="@+id/taskHolder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

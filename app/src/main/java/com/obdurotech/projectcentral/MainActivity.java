@@ -45,13 +45,39 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (savedInstanceState == null) {
-            Fragment fragment = new MainScreen();
-            fragment.setEnterTransition(new Slide(Gravity.LEFT));
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.flContent, fragment);
-            ft.commit();
+        Intent intent = getIntent();
+        String toNavigate = intent.getStringExtra("toNavigate");
+
+        if (toNavigate != null)
+        {
+            Fragment fragment = null;
+
+            if (toNavigate.equals("home"))
+                fragment = new MainScreen();
+            if (toNavigate.equals("settings"))
+                fragment = new ProfileScreen();
+            if (toNavigate.equals("about"))
+                fragment = new AboutFragment();
+            if (fragment != null)
+            {
+                fragment.setEnterTransition(new Slide(Gravity.LEFT));
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.flContent, fragment);
+                ft.commit();
+            }
         }
+
+        else
+        {
+            if (savedInstanceState == null) {
+                Fragment fragment = new MainScreen();
+                fragment.setEnterTransition(new Slide(Gravity.LEFT));
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.flContent, fragment);
+                ft.commit();
+            }
+        }
+
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
@@ -125,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new ProfileScreen();
                 break;
             case R.id.nav_about:
-                //
+                fragment = new AboutFragment();
                 break;
             case R.id.nav_task4:
                 FirebaseAuth auth = FirebaseAuth.getInstance();

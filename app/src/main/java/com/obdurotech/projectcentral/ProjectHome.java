@@ -30,7 +30,7 @@ public class ProjectHome extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private View navHeader;
     SimpleDraweeView draweeView;
-    private TextView txtName, txtMail;
+    private TextView projectTitle, txtName, txtMail;
 
     CardView tasksCard;
     CardView remindersCard;
@@ -50,6 +50,8 @@ public class ProjectHome extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        projectTitle = (TextView) findViewById(R.id.project_title);
+
         tasksCard = (CardView) findViewById(R.id.tasks_item);
         remindersCard = (CardView) findViewById(R.id.reminders_item);
         mediaCard = (CardView) findViewById(R.id.media_item);
@@ -63,8 +65,9 @@ public class ProjectHome extends AppCompatActivity {
         txtName = (TextView) navHeader.findViewById(R.id.nameTxt);
         txtMail = (TextView) navHeader.findViewById(R.id.emailTxt);
 
-        loadNavHeader();
+        projectTitle.setText(projectName);
 
+        loadNavHeader();
         setupDrawerContent(nvDrawer);
 
         drawerToggle = setupDrawerToggle();
@@ -72,12 +75,25 @@ public class ProjectHome extends AppCompatActivity {
         // Tie DrawerLayout events to the ActionBarToggle
         mDrawer.addDrawerListener(drawerToggle);
 
+        setTitle("ProjectHome");
+
+        //Open Media ViewPager
         mediaCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MediaHome.class);
                 intent.putExtra("project_name", projectName);
                 v.getContext().startActivity(intent);
+            }
+        });
+
+        //Open Tasks Activity
+        tasksCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent taskIntent = new Intent(v.getContext(), TaskHolder.class);
+                taskIntent.putExtra("project_name", projectName);
+                v.getContext().startActivity(taskIntent);
             }
         });
 
@@ -124,10 +140,13 @@ public class ProjectHome extends AppCompatActivity {
 
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
+        Intent in;
         Fragment fragment = null;
         switch(menuItem.getItemId()) {
             case R.id.nav_home:
-                fragment = new MainScreen();
+                in = new Intent(this, MainActivity.class);
+                in.putExtra("toNavigate", "home");
+                startActivity(in);
                 break;
             case R.id.nav_reminders:
                 //fragment = new front_page();
@@ -136,10 +155,14 @@ public class ProjectHome extends AppCompatActivity {
                 //fragment = new RecyclerViewFragment();
                 break;
             case R.id.nav_settings:
-                fragment = new ProfileScreen();
+                in = new Intent(this, MainActivity.class);
+                in.putExtra("toNavigate", "settings");
+                startActivity(in);
                 break;
             case R.id.nav_about:
-                //
+                in = new Intent(this, MainActivity.class);
+                in.putExtra("toNavigate", "about");
+                startActivity(in);
                 break;
             case R.id.nav_task4:
                 FirebaseAuth auth = FirebaseAuth.getInstance();

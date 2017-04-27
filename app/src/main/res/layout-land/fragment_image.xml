@@ -6,18 +6,21 @@
     android:layout_height="match_parent"
     tools:context="com.obdurotech.projectcentral.ImageFragment">
 
-    <!-- <ImageView
-        android:id="@+id/media_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" /> -->
+    <!--<ImageView
+       android:id="@+id/media_view"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_centerVertical="true"
+       android:layout_centerHorizontal="true"
+        android:src="@drawable/header_bg"
+        android:scaleType="fitCenter"/> -->
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:padding="20dp"
-        android:id="@+id/media_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        fresco:placeholderImage="@drawable/placeholder"/>
+   <com.facebook.drawee.view.SimpleDraweeView
+       android:padding="10dp"
+       android:id="@+id/media_view"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       fresco:placeholderImage="@drawable/placeholder"
+       android:scaleType="fitCenter"/>
 
 </RelativeLayout>
