@@ -19,6 +19,9 @@ public class Project implements Serializable
     @SerializedName("description")
     @Expose
     private String description;
+    @SerializedName("type")
+    @Expose
+    private String type;
     @SerializedName("tasks")
     @Expose
     private HashMap<String, Task> tasks = null;
@@ -55,6 +58,14 @@ public class Project implements Serializable
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public HashMap<String, Task> getTasks() {

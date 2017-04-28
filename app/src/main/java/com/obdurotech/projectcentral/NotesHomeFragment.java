@@ -114,7 +114,7 @@ public class NotesHomeFragment extends Fragment {
             }
         });
 
-        toolbarText.setText(user.getDisplayName());
+        toolbarText.setText(projectName + " - Notes");
 
         DatabaseReference childRef =
                 FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid()).

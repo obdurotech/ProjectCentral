@@ -40,7 +40,7 @@ public class ProjectsAdapter extends FirebaseRecyclerAdapter<Project, ProjectsAd
         private CardView myView;
         private TextView txtHeader;
         private TextView txtFooter;
-        private ImageView iv;
+        private ImageView icon;
         private ImageView optionsButton;
 
         FirebaseAuth mAuth;
@@ -52,7 +52,7 @@ public class ProjectsAdapter extends FirebaseRecyclerAdapter<Project, ProjectsAd
             myView = (CardView) v.findViewById(R.id.card_view);
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
-            iv = (ImageView) v.findViewById(R.id.icon);
+            icon = (ImageView) v.findViewById(R.id.icon);
             optionsButton = (ImageView) v.findViewById(R.id.textViewOptions);
 
             mAuth = FirebaseAuth.getInstance();
@@ -67,6 +67,14 @@ public class ProjectsAdapter extends FirebaseRecyclerAdapter<Project, ProjectsAd
 
         projectsViewHolder.txtHeader.setText(project.getName());
         projectsViewHolder.txtFooter.setText(project.getDescription());
+
+        if (project.getType() != null)
+        {
+            if (project.getType().equals("Work"))
+                projectsViewHolder.icon.setImageResource(R.drawable.ic_work_black_24dp);
+            if (project.getType().equals("Other"))
+                projectsViewHolder.icon.setImageResource(R.drawable.ic_list_black_24dp);
+        }
 
         projectsViewHolder.optionsButton.setOnClickListener(new View.OnClickListener() {
             @Override

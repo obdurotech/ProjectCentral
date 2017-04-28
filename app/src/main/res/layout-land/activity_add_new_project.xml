@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:hint="Enter Project Name"
             android:layout_marginBottom="32dp"
-            android:layout_above="@+id/project_desc_text"
+            android:layout_marginTop="50dp"
             android:layout_alignParentStart="true" />
 
         <EditText
@@ -20,20 +20,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Project Description"
-            android:layout_marginBottom="23dp"
-            android:paddingBottom="50dp"
-            android:paddingTop="50dp"
-            android:layout_above="@+id/project_done_btn"
+            android:paddingBottom="25dp"
+            android:paddingTop="25dp"
+            android:layout_below="@id/project_name_text"
             android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:id="@+id/project_type_spinner"
+        android:layout_width="match_parent"
+        android:spinnerMode="dialog"
+        android:layout_height="wrap_content"
+        android:prompt="@string/type_prompt"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/project_type_text"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/project_type_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:text="Task Type:"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/project_desc_text"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/project_done_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Done!"
-        android:layout_marginBottom="42dp"
         android:background="@color/colorAccent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:elevation="4dp"/>
+        android:elevation="4dp"
+        android:layout_below="@id/project_type_spinner"/>
 </RelativeLayout>

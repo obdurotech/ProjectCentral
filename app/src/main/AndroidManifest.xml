@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.obdurotech.projectcentral">
 
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <permission
@@ -80,7 +81,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TaskHolder" />
         <activity android:name=".TaskDetail" />
-        <activity android:name=".AddNewTask"/>
+        <activity android:name=".AddNewTask" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -88,11 +90,13 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
+
         <activity android:name=".NotesHolder" />
         <activity android:name=".AddNewNote" />
-        <activity android:name=".NotesDetail"/>
+        <activity android:name=".NotesDetail" />
+        <activity android:name=".SplashScreen"></activity>
     </application>
 
 </manifest>
