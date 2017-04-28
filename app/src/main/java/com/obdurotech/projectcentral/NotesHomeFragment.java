@@ -90,6 +90,7 @@ public class NotesHomeFragment extends Fragment {
 
         FloatingActionButton notes_fab;
         TextView toolbarText;
+        DatabaseReference childRef;
         notes_fab = (FloatingActionButton) rootView.findViewById(R.id.notes_fab);
         toolbarText = (TextView) rootView.findViewById(R.id.notes_titleText);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.notes_recycler);
@@ -100,9 +101,15 @@ public class NotesHomeFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = mAuth.getCurrentUser();
 
-        DatabaseReference userRef =
-                FirebaseDatabase.getInstance().getReference().child("userdata").child("projects").getRef();
-
+        if(projectName.equals("none_none"))
+        {
+            DatabaseReference userRef =
+                    FirebaseDatabase.getInstance().getReference().child("userdata").getRef();
+        }
+        else {
+            DatabaseReference userRef =
+                    FirebaseDatabase.getInstance().getReference().child("userdata").child("projects").getRef();
+        }
         notes_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,10 +122,17 @@ public class NotesHomeFragment extends Fragment {
         });
 
         toolbarText.setText(user.getDisplayName());
-
-        DatabaseReference childRef =
-                FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid()).
-                        child("projects").child(projectName).child("notes").getRef();
+        if(projectName.equals("none_none"))
+        {
+            childRef =
+                    FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid())
+                            .child("quicknotes").getRef();
+        }
+        else {
+            childRef =
+                    FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid()).
+                            child("projects").child(projectName).child("notes").getRef();
+        }
         myFirebaseRecylerAdapter = new NotesAdapter(Note.class,
                 R.layout.activity_notes_adapter, NotesAdapter.NotesViewHolder.class,
                 childRef, getContext(), projectName);

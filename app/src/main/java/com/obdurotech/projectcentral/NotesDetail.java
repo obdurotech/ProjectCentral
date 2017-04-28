@@ -31,7 +31,7 @@ public class NotesDetail extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         Intent newIntent = getIntent();
-        String projectName = newIntent.getStringExtra("project_name");
+        final String projectName = newIntent.getStringExtra("project_name");
         final Note note = (Note) newIntent.getSerializableExtra("note_name");
 
         noteDescription = (EditText) findViewById(R.id.notesDetail_description);
@@ -39,9 +39,15 @@ public class NotesDetail extends AppCompatActivity {
         doneBtn = (Button) findViewById(R.id.notesDetail_button);
         notesTopText = (TextView) findViewById(R.id.notesDetail_toptext);
 
-        projectRef = FirebaseDatabase.getInstance().getReference().child("userdata")
-                .child(user.getUid()).child("projects").child(projectName).getRef();
-
+        if(projectName.equals("none_none"))
+        {
+            projectRef = FirebaseDatabase.getInstance().getReference().child("userdata")
+                    .child(user.getUid()).child("quicknotes").getRef();
+        }
+        else {
+            projectRef = FirebaseDatabase.getInstance().getReference().child("userdata")
+                    .child(user.getUid()).child("projects").child(projectName).getRef();
+        }
         notesTopText.setText(projectName);
         noteDescription.setText(note.getNoteDesc());
 
@@ -65,8 +71,13 @@ public class NotesDetail extends AppCompatActivity {
 
                 note.setNoteDesc(noteDescription.getText().toString());
 
-                projectRef.child("notes").child(note.getNoteId()).setValue(note);
-
+                if(projectName.equals("none_none"))
+                {
+                    projectRef.child(note.getNoteId()).setValue(note);
+                }
+                else {
+                    projectRef.child("notes").child(note.getNoteId()).setValue(note);
+                }
                 doneBtn.setEnabled(false);
                 note_fab.setEnabled(true);
 

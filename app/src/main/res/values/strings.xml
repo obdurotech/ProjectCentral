@@ -2,6 +2,7 @@
     <string name="app_name">ProjectCentral</string>
     <string name="task1">HomeScreen</string>
     <string name="reminders">Reminders</string>
+    <string name="quicknotes">Quick Notes</string>
     <string name="contact">Contact</string>
     <string name="about">About Us</string>
     <string name="settings">Settings</string>

@@ -22,6 +22,18 @@ public class Userdatum implements Serializable
     @SerializedName("projects")
     @Expose
     private HashMap<String, Project> projects = null;
+
+    public void setQuicknotes(HashMap<String, Note> quicknotes) {
+        this.quicknotes = quicknotes;
+    }
+
+    public HashMap<String, Note> getQuicknotes() {
+        return quicknotes;
+    }
+
+    @SerializedName("quicknotes")
+    @Expose
+    private HashMap<String, Note> quicknotes = null;
     private final static long serialVersionUID = -367770429138071270L;
 
     public String getId() {

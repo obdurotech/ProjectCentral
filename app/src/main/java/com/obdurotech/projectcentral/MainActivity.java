@@ -139,12 +139,10 @@ public class MainActivity extends AppCompatActivity {
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
+        String type = null;
         switch(menuItem.getItemId()) {
             case R.id.nav_home:
                 fragment = new MainScreen();
-                break;
-            case R.id.nav_reminders:
-                //fragment = new front_page();
                 break;
             case R.id.nav_settings:
                 fragment = new ProfileScreen();
@@ -155,6 +153,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_contact:
                 fragment = new ContactFragment();
                 break;
+            case R.id.nav_quicknotes:
+                Intent notesIntent = new Intent(getApplicationContext(), NotesHolder.class);
+                notesIntent.putExtra("project_name", "none_none");
+                getApplicationContext().startActivity(notesIntent);
+                break;
             case R.id.nav_task4:
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 auth.signOut();
@@ -164,7 +167,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //replacing the fragment
-        if (fragment != null) {
+
+        if (fragment != null && type == null) {
             fragment.setEnterTransition(new Slide(Gravity.BOTTOM));
             fragment.setExitTransition(new Slide(Gravity.START));
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

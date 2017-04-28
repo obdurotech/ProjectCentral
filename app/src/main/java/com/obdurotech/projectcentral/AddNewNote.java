@@ -20,6 +20,7 @@ import java.util.Date;
 public class AddNewNote extends AppCompatActivity {
 
     FirebaseAuth mAuth;
+    DatabaseReference childRef;
     private TextView notesDescription;
     private NotesClass notesClass;
     private Button submitButton;
@@ -42,15 +43,27 @@ public class AddNewNote extends AppCompatActivity {
                 String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 
                 final String notesId = "notes_" + timeStamp;
-                DatabaseReference childRef =
-                        FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid()).child("projects").
-                                child(projectName).getRef();
+                if(projectName.equals("none_none"))
+                {
+                    childRef =
+                            FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid()).
+                                    child("quicknotes").getRef();
+
+                }
+                else {
+                    childRef =
+                            FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid()).child("projects").
+                                    child(projectName).getRef();
+                }
 
                 noteObj.setNoteId(notesId);
                 noteObj.setNoteDesc(notesDescription.getText().toString());
-
-                childRef.child("notes").child(noteObj.getNoteId()).setValue(noteObj);
-
+                if(projectName.equals("none_none")) {
+                    childRef.child(noteObj.getNoteId()).setValue(noteObj);
+                }
+                else {
+                    childRef.child("notes").child(noteObj.getNoteId()).setValue(noteObj);
+                }
                 Toast.makeText(view.getContext(), "New Note Added" , Toast.LENGTH_SHORT).show();
 
                 finish();

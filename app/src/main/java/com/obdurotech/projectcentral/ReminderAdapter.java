@@ -75,20 +75,17 @@ public class ReminderAdapter extends FirebaseRecyclerAdapter<Reminder, ReminderA
                     reminderClass.setContext(mContext);
                     reminderClass.initializeDataFromCloud();
                 }
-                /*popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu1:
-                                break;
-                            case R.id.menu2:
                                 reminderClass.removeItemFromServer(reminder);
                                 break;
                         }
                         return false;
                     }
-                });*/
-
+                });
                 popup.show();
             }
         });

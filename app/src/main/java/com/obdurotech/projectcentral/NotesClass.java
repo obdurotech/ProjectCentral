@@ -93,6 +93,13 @@ public class NotesClass {
 
     }
 
+    public void removeItemFromServer(Note note){
+        if(note!=null){
+            String id = note.getNoteId(); //get("id");
+            mRef.child(id).removeValue();
+        }
+    }
+
     public void initializeDataFromCloud() {
         notesList.clear();
         mRef.addChildEventListener(new com.google.firebase.database.ChildEventListener() {
@@ -135,7 +142,10 @@ public class NotesClass {
 
         uid = userID;
         notesList = new ArrayList<>();
-        mRef = FirebaseDatabase.getInstance().getReference().child("userdata").child(uid).child("projects").child(projectName).child("notes").getRef();
+        if(projectName.equals("none_none"))
+            mRef = FirebaseDatabase.getInstance().getReference().child("userdata").child(uid).child("quicknotes").getRef();
+        else
+            mRef = FirebaseDatabase.getInstance().getReference().child("userdata").child(uid).child("projects").child(projectName).child("notes").getRef();
         myFirebaseRecylerAdapter = null;
         mContext = null;
 
