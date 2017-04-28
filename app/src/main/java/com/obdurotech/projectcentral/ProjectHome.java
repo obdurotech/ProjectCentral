@@ -106,6 +106,16 @@ public class ProjectHome extends AppCompatActivity {
                 v.getContext().startActivity(reminderIntent);
             }
         });
+
+        //Open Notes screen
+        notesCard.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent notesIntent = new Intent(v.getContext(), NotesHolder.class);
+                notesIntent.putExtra("project_name", projectName);
+                v.getContext().startActivity(notesIntent);
+            }
+        });
     }
 
     private void loadNavHeader() {
@@ -151,9 +161,6 @@ public class ProjectHome extends AppCompatActivity {
             case R.id.nav_reminders:
                 //fragment = new front_page();
                 break;
-            case R.id.nav_notes:
-                //fragment = new RecyclerViewFragment();
-                break;
             case R.id.nav_settings:
                 in = new Intent(this, MainActivity.class);
                 in.putExtra("toNavigate", "settings");
@@ -162,6 +169,11 @@ public class ProjectHome extends AppCompatActivity {
             case R.id.nav_about:
                 in = new Intent(this, MainActivity.class);
                 in.putExtra("toNavigate", "about");
+                startActivity(in);
+                break;
+            case R.id.nav_contact:
+                in = new Intent(this, MainActivity.class);
+                in.putExtra("toNavigate", "contact");
                 startActivity(in);
                 break;
             case R.id.nav_task4:

@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new ProfileScreen();
             if (toNavigate.equals("about"))
                 fragment = new AboutFragment();
+            if (toNavigate.equals("contact"))
+                fragment = new ContactFragment();
             if (fragment != null)
             {
                 fragment.setEnterTransition(new Slide(Gravity.LEFT));
@@ -144,14 +146,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_reminders:
                 //fragment = new front_page();
                 break;
-            case R.id.nav_notes:
-                //fragment = new RecyclerViewFragment();
-                break;
             case R.id.nav_settings:
                 fragment = new ProfileScreen();
                 break;
             case R.id.nav_about:
                 fragment = new AboutFragment();
+                break;
+            case R.id.nav_contact:
+                fragment = new ContactFragment();
                 break;
             case R.id.nav_task4:
                 FirebaseAuth auth = FirebaseAuth.getInstance();

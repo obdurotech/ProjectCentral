@@ -11,21 +11,21 @@
         android:id="@+id/taskDesc_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Task Description"
+        android:hint="Enter Task Description (Optional)"
         android:paddingTop="50dp"
-        android:paddingBottom="75dp"
-        android:layout_marginTop="63dp"
+        android:paddingBottom="50dp"
         android:layout_below="@+id/taskName_input"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="21dp" />
 
         <EditText
             android:id="@+id/taskName_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Task Name"
+            android:layout_marginTop="21dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="109dp" />
+            android:layout_alignParentStart="true" />
 
     <Spinner
         android:id="@+id/taskType_spinner"
@@ -36,30 +36,29 @@
         android:paddingBottom="15dp"
         android:paddingTop="15dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="64dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/task_type_text"/>
+        android:layout_below="@+id/task_type_text"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/task_done_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Task!"
+        android:layout_marginBottom="19dp"
         android:background="@color/colorAccent"
         android:layout_below="@+id/taskType_spinner"
-        android:layout_alignParentStart="true"
         android:elevation="4dp"/>
 
     <TextView
         android:id="@+id/task_type_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:paddingStart="10dp"
         android:text="Task Type:"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:layout_marginTop="17dp"
         android:layout_below="@+id/taskDesc_input"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

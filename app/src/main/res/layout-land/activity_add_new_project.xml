@@ -11,16 +11,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Project Name"
+            android:layout_marginBottom="32dp"
             android:layout_above="@+id/project_desc_text"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="85dp" />
+            android:layout_alignParentStart="true" />
 
         <EditText
             android:id="@+id/project_desc_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Project Description"
-            android:layout_marginBottom="101dp"
+            android:layout_marginBottom="23dp"
             android:paddingBottom="50dp"
             android:paddingTop="50dp"
             android:layout_above="@+id/project_done_btn"
@@ -31,9 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Done!"
-        android:layout_marginBottom="140dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="42dp"
         android:background="@color/colorAccent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:elevation="4dp"/>
 </RelativeLayout>

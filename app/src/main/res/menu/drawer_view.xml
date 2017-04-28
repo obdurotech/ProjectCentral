@@ -12,10 +12,6 @@
             android:id="@+id/nav_reminders"
             android:icon="@drawable/ic_alarm_black_24dp"
             android:title="@string/reminders"/>
-        <item
-            android:id="@+id/nav_notes"
-            android:icon="@drawable/ic_note_black_24dp"
-            android:title="@string/notes" />
     </group>
 
     <group
@@ -34,6 +30,10 @@
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_face_black_24dp"
             android:title="@string/about" />
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/ic_mail_black_24dp"
+            android:title="@string/contact" />
     </group>
 
     <group

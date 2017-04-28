@@ -8,39 +8,10 @@
     tools:context="com.obdurotech.projectcentral.ReminderDetail">
 
     <TextView
-        android:text="When?"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:paddingTop="10dp"
-        android:textSize="20dp"
-        android:background="@drawable/selector"
-        android:textColor="@color/black"
-        android:layout_marginTop="43dp"
-        android:id="@+id/reminderDetail_When_textView"
-        android:paddingStart="10dp"
-        android:layout_below="@+id/reminderDetail_TitleText"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Where?"
-        android:background="@drawable/selector"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:paddingTop="10dp"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:id="@+id/reminderDetail_Where_textView"
-        android:layout_above="@+id/reminderDetail_Place_textView"
-        android:layout_alignParentStart="true"
-        android:paddingStart="10dp"/>
-
-    <TextView
         android:id="@+id/reminderDetail_Place_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="24dp"
         android:background="#EEEEEE"
         android:paddingBottom="10dp"
         android:paddingStart="10dp"
@@ -49,7 +20,9 @@
         android:text="Location"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/reminderDetail_Date_textView"
@@ -62,30 +35,29 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20dp"
-        android:layout_below="@+id/reminderDetail_When_textView"
+        android:layout_above="@+id/reminderDetail_DateDetail"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/reminderDetail_TimeDetail"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/reminderDetail_Time_textView"
         android:background="#EEEEEE"
         android:paddingStart="10dp"
-        android:paddingEnd="10dp"
         android:paddingTop="10dp"
         android:text="TimeDetail"
+        android:paddingEnd="10dp"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:layout_above="@+id/reminderDetail_Place_textView"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="35dp" />
 
     <TextView
         android:id="@+id/reminderDetail_DateDetail"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/reminderDetail_Date_textView"
         android:background="#EEEEEE"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
@@ -93,7 +65,9 @@
         android:text="DateDetail"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:layout_above="@+id/reminderDetail_Time_textView"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/reminderDetail_Time_textView"
@@ -106,22 +80,22 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20dp"
-        android:layout_below="@+id/reminderDetail_DateDetail"
+        android:layout_above="@+id/reminderDetail_TimeDetail"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/reminderDetail_TitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="81dp"
         android:text=""
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.Material"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/colorAccent"/>
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="26dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

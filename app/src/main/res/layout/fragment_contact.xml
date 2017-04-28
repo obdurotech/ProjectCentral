@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.obdurotech.projectcentral.ContactFragment"
+    android:background="@color/white">
+
+
+    <ImageView
+        android:id="@+id/contactScreen_logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="96dp"
+        app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/contactScreen_contactBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contactScreen_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="79dp"
+        android:text="Contact Us!"
+        android:background="@color/colorAccent"/>
+
+    <Button
+        android:id="@+id/contactScreen_shareBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contactScreen_contactBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="97dp"
+        android:text="Share the App!"
+        android:background="@color/colorAccent"/>
+
+
+</RelativeLayout>

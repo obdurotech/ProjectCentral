@@ -82,8 +82,6 @@ public class ProjectsAdapter extends FirebaseRecyclerAdapter<Project, ProjectsAd
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu1:
-                                break;
-                            case R.id.menu2:
                                 projectClass.removeItemFromServer(project);
                                 break;
                         }

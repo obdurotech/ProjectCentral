@@ -48,7 +48,8 @@
         android:textSize="18sp"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/taskType_heading"/>
 
     <TextView
         android:id="@+id/taskType_heading"
@@ -73,7 +74,8 @@
         android:text="TaskName"
         android:textAlignment="center"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/taskDesc_text"

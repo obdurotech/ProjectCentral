@@ -12,9 +12,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+
 public class ReminderDetail extends AppCompatActivity {
 
-    private TextView timeView;
+    private TextView remTitle;
+    private TextView timeView, dateView;
     private TextView locationView;
     FirebaseAuth mAuth;
 
@@ -26,10 +30,21 @@ public class ReminderDetail extends AppCompatActivity {
         Reminder reminder = (Reminder) newIntent.getSerializableExtra("reminder_name");
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        timeView = (TextView) findViewById(R.id.reminderDetail_Time_textView);
+
+        remTitle = (TextView) findViewById(R.id.reminderDetail_TitleText);
+        dateView = (TextView) findViewById(R.id.reminderDetail_DateDetail);
+        timeView = (TextView) findViewById(R.id.reminderDetail_TimeDetail);
         locationView = (TextView) findViewById(R.id.reminderDetail_Place_textView);
 
-        timeView.setText(reminder.getReminderDate().toString());
+        Format dateFormat = new SimpleDateFormat("EEE MMM/dd/YYYY");
+        String date = dateFormat.format(reminder.getReminderDate());
+
+        Format timeFormat = new SimpleDateFormat("HH:mm");
+        String time = timeFormat.format(reminder.getReminderDate());
+
+        remTitle.setText(reminder.getRemDesc());
+        dateView.setText(date);
+        timeView.setText(time);
         locationView.setText(reminder.getReminderLocation());
     }
 }
