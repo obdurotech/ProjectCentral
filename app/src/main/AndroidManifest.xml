@@ -32,7 +32,8 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:resizeableActivity="true">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCcqjM9NR1PwKsGLtn8YykpVUD7ToR0hv8" />
@@ -92,11 +93,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
         <activity android:name=".NotesHolder" />
         <activity android:name=".AddNewNote" />
         <activity android:name=".NotesDetail" />
-        <activity android:name=".SplashScreen"></activity>
+        <activity android:name=".QuickNotesHolder"/>
     </application>
 
 </manifest>

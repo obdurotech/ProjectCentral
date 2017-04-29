@@ -56,6 +56,13 @@ public class ReminderClass {
         }
     }
 
+    public void removeItemFromServer(Reminder reminder){
+        if(reminder!=null){
+            String id = reminder.getRemId(); //get("id");
+            mRef.child(id).removeValue();
+        }
+    }
+
     public void onItemAddedToCloud(HashMap item){
         int insertPosition = 0;
         String id = (String) item.get("remId");

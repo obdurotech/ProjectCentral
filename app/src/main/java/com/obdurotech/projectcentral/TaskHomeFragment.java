@@ -120,7 +120,7 @@ public class TaskHomeFragment extends Fragment {
             }
         });
 
-        toolbarText.setText(user.getDisplayName());
+        toolbarText.setText(projectName + " - Tasks");
 
         DatabaseReference childRef =
                 FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid()).

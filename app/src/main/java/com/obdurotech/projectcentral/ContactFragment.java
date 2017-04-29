@@ -35,8 +35,8 @@ public class ContactFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    Button shareBtn;
-    Button contactBtn;
+    Button shareBtn, contactBtn, rateBtn;
+
     private ShareActionProvider mShareActionProvider;
 
     public ContactFragment() {
@@ -78,6 +78,7 @@ public class ContactFragment extends Fragment {
 
         contactBtn = (Button) rootView.findViewById(R.id.contactScreen_contactBtn);
         shareBtn = (Button) rootView.findViewById(R.id.contactScreen_shareBtn);
+        rateBtn = (Button) rootView.findViewById(R.id.contactScreen_rateBtn);
 
         contactBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +106,15 @@ public class ContactFragment extends Fragment {
                 sendIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.shareApp));
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
+            }
+        });
+
+        rateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.obdurotech.projectcentral"));
+                startActivity(intent);
             }
         });
 

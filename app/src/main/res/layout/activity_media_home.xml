@@ -41,8 +41,7 @@
         android:layout_height="wrap_content"
         android:text="PREV"
         android:layout_above="@+id/media_toolbar"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="35dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/uploadBtn"
@@ -57,9 +56,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NEXT"
-        android:layout_marginStart="18dp"
         android:layout_below="@+id/view_Pager"
-        android:layout_toEndOf="@+id/uploadBtn" />
+        android:layout_alignParentEnd="true" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/media_toolbar"

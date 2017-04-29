@@ -23,7 +23,7 @@
         android:id="@+id/taskStatus_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="10dp"
         android:text="Task Status"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -36,9 +36,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/task_bg_pending"
-        android:paddingBottom="5dp"
+        android:paddingBottom="2dp"
         android:paddingStart="15dp"
-        android:paddingTop="5dp"
+        android:paddingTop="2dp"
         android:text="Task Type"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
-        android:paddingBottom="10dp"
+        android:paddingBottom="5dp"
         android:text="Details"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -108,7 +108,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignTop="@+id/taskStatus_text"
-        android:layout_alignStart="@+id/taskName_text" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/taskDone_button"
@@ -117,8 +117,8 @@
         android:text="Mark as Done"
         android:background="@color/colorAccent"
         android:textColor="@color/white"
-        android:layout_marginTop="37dp"
-        android:layout_below="@+id/taskStatus_text"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/taskStatus_image"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>

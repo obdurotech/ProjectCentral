@@ -36,7 +36,7 @@ public class ReminderDetail extends AppCompatActivity {
         timeView = (TextView) findViewById(R.id.reminderDetail_TimeDetail);
         locationView = (TextView) findViewById(R.id.reminderDetail_Place_textView);
 
-        Format dateFormat = new SimpleDateFormat("EEE MMM/dd/YYYY");
+        Format dateFormat = new SimpleDateFormat("EEE MMM/dd/yyyy");
         String date = dateFormat.format(reminder.getReminderDate());
 
         Format timeFormat = new SimpleDateFormat("HH:mm");

@@ -149,7 +149,7 @@ public class ReminderHomeFragment extends Fragment {
             }
         });*/
 
-        toolbarText.setText(user.getDisplayName());
+        toolbarText.setText(projectName + " - Reminders");
 
         DatabaseReference childRef =
                 FirebaseDatabase.getInstance().getReference().child("userdata").child(user.getUid()).

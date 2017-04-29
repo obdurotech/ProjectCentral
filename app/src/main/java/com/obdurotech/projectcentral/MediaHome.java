@@ -373,7 +373,7 @@ public class MediaHome extends AppCompatActivity {
                             if (mediaName != null && mediaName.length() > 0)
                                 media.setMediaName(mediaName);
                             else
-                                media.setMediaName(type + vpPager.getCurrentItem());
+                                media.setMediaName(type + String.valueOf(vpPager.getCurrentItem() + 1)); //String.valueOf(mediaList.size() + 1));
                             media.setMediaType(type);
 
                             mRef.child(filename).setValue(media);

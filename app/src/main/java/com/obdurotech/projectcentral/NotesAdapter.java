@@ -71,6 +71,17 @@ public class NotesAdapter extends FirebaseRecyclerAdapter<Note, NotesAdapter.Not
                     notesClass.setContext(mContext);
                     notesClass.initializeDataFromCloud();
                 }
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menu1:
+                                notesClass.removeItemFromServer(note);
+                                break;
+                        }
+                        return false;
+                    }
+                });
                 popup.show();
             }
         });

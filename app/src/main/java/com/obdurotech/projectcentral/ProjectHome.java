@@ -158,8 +158,10 @@ public class ProjectHome extends AppCompatActivity {
                 in.putExtra("toNavigate", "home");
                 startActivity(in);
                 break;
-            case R.id.nav_reminders:
-                //fragment = new front_page();
+            case R.id.nav_quicknotes:
+                Intent notesIntent = new Intent(getApplicationContext(), NotesHolder.class);
+                notesIntent.putExtra("project_name", "none_none");
+                startActivity(notesIntent);
                 break;
             case R.id.nav_settings:
                 in = new Intent(this, MainActivity.class);

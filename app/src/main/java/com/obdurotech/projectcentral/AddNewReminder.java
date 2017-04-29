@@ -102,7 +102,8 @@ public class AddNewReminder extends AppCompatActivity {
                 intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, cal.getTimeInMillis());
                 intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, cal.getTimeInMillis() + 60 * 60 * 1000);
                 intent.putExtra(CalendarContract.Events.TITLE, descText.getText().toString());
-                intent.putExtra(CalendarContract.Events.EVENT_LOCATION, place.getName() + " , " + place.getAddress());
+                if (place != null)
+                    intent.putExtra(CalendarContract.Events.EVENT_LOCATION, place.getName() + " , " + place.getAddress());
                 startActivity(intent);
             }
         });

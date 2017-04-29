@@ -4,37 +4,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.obdurotech.projectcentral.ContactFragment"
-    android:background="@color/white">
+    android:background="@color/colorPrimary">
 
-
-    <ImageView
-        android:id="@+id/contactScreen_logo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="27dp"
-        app:srcCompat="@drawable/logo"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/contactScreen_contactBtn"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:text="Contact Us!"
-        android:background="@color/colorAccent"
-        android:layout_below="@+id/contactScreen_logo"
-        android:layout_alignParentStart="true" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/contactScreen_shareBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Share the App!"
-        android:background="@color/colorAccent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="42dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/contactScreen_logo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/logo"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:id="@+id/contactScreen_contactBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Contact Us!"
+                android:background="@color/colorAccent"
+                android:layout_below="@+id/contactScreen_logo"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:id="@+id/contactScreen_shareBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Share the App!"
+                android:background="@color/colorAccent"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/contactScreen_contactBtn"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="37dp"
+                android:text="Rate  on Play Store!"
+                android:textAlignment="center"
+                android:textAppearance="@android:style/TextAppearance.Material"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:layout_marginStart="9dp"
+                android:layout_below="@+id/contactScreen_shareBtn"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:id="@+id/contactScreen_rateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/play_badge"
+                android:elevation="4dp"
+                android:layout_alignBaseline="@+id/textView"
+                android:layout_alignBottom="@+id/textView"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+
+    </ScrollView>
 
 
 </RelativeLayout>

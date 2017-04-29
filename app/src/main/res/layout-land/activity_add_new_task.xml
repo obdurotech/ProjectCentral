@@ -12,11 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Task Description (Optional)"
-        android:paddingTop="50dp"
-        android:paddingBottom="50dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/taskName_input"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="21dp" />
+        android:layout_alignParentStart="true" />
 
         <EditText
             android:id="@+id/taskName_input"
@@ -44,7 +44,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Task!"
-        android:layout_marginBottom="19dp"
         android:background="@color/colorAccent"
         android:layout_below="@+id/taskType_spinner"
         android:elevation="4dp"/>
@@ -57,8 +56,9 @@
         android:text="Task Type:"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:layout_marginTop="17dp"
         android:layout_below="@+id/taskDesc_input"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
 
 </RelativeLayout>
